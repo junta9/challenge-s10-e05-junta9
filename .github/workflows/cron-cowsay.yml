@@ -25,6 +25,3 @@ jobs:
           text: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
             Voici une blague: ${{ steps.myjoke.outputs.dad-joke }}
-
-    env:
-      # blague: ${{ steps.myjoke.outputs.dad-joke }}
