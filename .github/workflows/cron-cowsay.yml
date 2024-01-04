@@ -18,7 +18,8 @@ jobs:
           - Que fait un crocodile quand il rencontre une superbe femelle ? Il Lacoste.
           - Pourquoi les pêcheurs ne sont pas gros ? Parce qu’ils surveillent leur ligne.
         exclude: 
-          - prenom: ['geraldine','Séraphine']
+          - prenom: 'geraldine'
+          - prenom: 'Séraphine'
     steps:
     - name: cow speaking
       uses: mscoutermarsh/cowsays-action@master
