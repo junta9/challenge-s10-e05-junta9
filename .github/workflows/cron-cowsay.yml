@@ -45,7 +45,9 @@ jobs:
         env:
           blague: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            "Voici une blague: ${{ steps.myjoke.outputs.dad-joke }}"
+            "Voici une blague: ${{ env.augustine_blague }}"
+          augustine_blague: ${{ steps.myjoke.outputs.dad-joke }}
+          
 
       - name: cow speaking every 15mn
         if: github.event_name == 'schedule' && github.event.schedule == '*/15 * * * *' && matrix.prenom == 'Marguerite'
@@ -55,4 +57,4 @@ jobs:
         env:
           blague: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            "Voici une blague: ${{ steps.Augustine }}"
+            "Voici une blague: ${{ steps.Augustine.env.augustine_blague }}"
