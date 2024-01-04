@@ -1,24 +1,58 @@
 name: Cows Workflow
 
 on:
-  push:
+  schedule:
+    - cron: '0 9 * * *'  # Exécuter tous les matins à 9h UTC
+    - cron: '0 10 * * *' # Exécuter tous les matins à 10h UTC
+    - cron: '*/10 * * * *' # Exécuter toutes les 10 minutes
+    - cron: '*/15 * * * *' # Exécuter toutes les 15 minutes
 
 jobs:
   run-matrixed:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 2
+      # max-parallel: 2
       matrix:
-        prenom: ['marguerite','geraldine','augustine','Séraphine']
+        prenom: ['Marguerite','Geraldine','Augustine','Séraphine']
 
     steps:
       # Get the joke
       - id: myjoke
         uses: mickeygoussetorg/get-a-dad-joke@v1
 
-      - name: cow speaking
+      - name: cow speaking at 9h
+        if: github.event_name == 'schedule' && github.event.schedule == '0 9 * * *' && matrix.prenom != 'Séraphine'
         uses: mscoutermarsh/cowsays-action@master
         with:
-          text: |
+          text: ${{ env.bonjour }}
+        env:
+          bonjour: "Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}!"
+
+      - name: cow speaking at 10h
+        if: github.event_name == 'schedule' && github.event.schedule == '0 10 * * *' && matrix.prenom == 'Séraphine'
+        uses: mscoutermarsh/cowsays-action@master
+        with:
+          text: ${{ env.bonjour }}
+        env:
+          bonjour: "Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}!"
+
+      - name: cow speaking every 10mn
+        id: Augustine
+        if: github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *' && matrix.prenom == 'Augustine'
+        uses: mscoutermarsh/cowsays-action@master
+        with:
+          text: ${{ env.blague }}
+        env:
+          blague: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            Voici une blague: ${{ steps.myjoke.outputs.dad-joke }}
+            "Voici une blague: ${{ steps.myjoke.outputs.dad-joke }}"
+
+      - name: cow speaking every 15mn
+        if: github.event_name == 'schedule' && github.event.schedule == '*/15 * * * *' && matrix.prenom == 'Marguerite'
+        uses: mscoutermarsh/cowsays-action@master
+        with:
+          text: ${{ env.blague }}
+        env:
+          blague: |
+            Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
+            "Voici une blague: ${{ steps.Augustine }}"
