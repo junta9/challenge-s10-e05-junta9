@@ -12,26 +12,19 @@ jobs:
         prenom: ['marguerite','geraldine','augustine','Séraphine']
 
     steps:
-      - name: generate random number
-        id: random
-        run: echo "RANDOM_NUMBER=$(shuf -i 1-6 -n 1)" >> $GITHUB_ENV
-
-      - name: export random number
-        run: echo "EXPORTED_RANDOM_NUMBER=${{ env.RANDOM_NUMBER }}" >> $GITHUB_ENV
+      # Get the joke
+      - id: myjoke
+        uses: mickeygoussetorg/get-a-dad-joke@v1
+      # Use the joke output in another step
+      - name: Output Dad Joke
+        run: echo "BLAGUE=${{ steps.myjoke.outputs.dad-joke }}" >> $GITHUB_ENV
 
       - name: cow speaking
         uses: mscoutermarsh/cowsays-action@master
         with:
           text: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            Voici une blague: ${{ env.blague[env.random_number] }}
-            Voici une blague: ${{ env.blague[2] }}
+            Voici une blague: ${{ steps.myjoke.outputs.dad-joke }}
 
-        env:
-          random_number: ${{ env.EXPORTED_RANDOM_NUMBER}}
-          blague: |
-            - Quelle est la partie préférée d’un astronaute sur un clavier? L’espace
-            - Comment appelle-t-on une chauve-souris avec une perruque ? Une souris
-            - Pourquoi les canards sont toujours à l'heure ? Parce qu’ils sont dans l’étang.
-            - Que fait un crocodile quand il rencontre une superbe femelle ? Il Lacoste.
-            - Pourquoi les pêcheurs ne sont pas gros ? Parce qu’ils surveillent leur ligne.
+    env:
+      # blague: ${{ steps.myjoke.outputs.dad-joke }}
