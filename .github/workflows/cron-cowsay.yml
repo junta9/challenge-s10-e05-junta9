@@ -20,11 +20,11 @@ jobs:
         with:
           text: |
             Hello les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            Voici une blague: ${{ matrix.blague[steps.random.outputs.value] }}
-        env:
-          matrix.blague: |
-            - Quelle est la partie préférée d’un astronaute sur un clavier? L’espace
-            - Comment appelle-t-on une chauve-souris avec une perruque ? Une souris
-            - Pourquoi les canards sont toujours à l'heure ? Parce qu’ils sont dans l’étang.
-            - Que fait un crocodile quand il rencontre une superbe femelle ? Il Lacoste.
-            - Pourquoi les pêcheurs ne sont pas gros ? Parce qu’ils surveillent leur ligne.
+            Voici une blague: ${{ env.blague[steps.random.outputs.value] }}
+    env:
+      blague: |
+        - Quelle est la partie préférée d’un astronaute sur un clavier? L’espace
+        - Comment appelle-t-on une chauve-souris avec une perruque ? Une souris
+        - Pourquoi les canards sont toujours à l'heure ? Parce qu’ils sont dans l’étang.
+        - Que fait un crocodile quand il rencontre une superbe femelle ? Il Lacoste.
+        - Pourquoi les pêcheurs ne sont pas gros ? Parce qu’ils surveillent leur ligne.
