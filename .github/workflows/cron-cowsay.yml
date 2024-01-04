@@ -25,6 +25,7 @@ jobs:
           text: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
             Voici une blague: ${{ env.blague[env.random_number] }}
+            Voici une blague: ${{ env.blague[2] }}
 
         env:
           random_number: ${{ env.EXPORTED_RANDOM_NUMBER}}
