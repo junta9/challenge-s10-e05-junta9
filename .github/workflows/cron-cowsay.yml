@@ -40,15 +40,14 @@ jobs:
         if: github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *' && matrix.prenom == 'Augustine'
         uses: mscoutermarsh/cowsays-action@master
         with:
-          text: ${{ env.blague }}
-        env:
-          blague: |
+          text: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            "Voici une blague: ${{ env.augustine_blague }}"
-          augustine_blague: ${{ steps.myjoke.outputs.dad-joke }}
+            Voici une blague: ${{ env.blague }}
+        env:
+          blague: ${{ steps.myjoke.outputs.dad-joke }}
           
 
-      - name: cow speaking every 15mn
+      - name: cow speaking every 5mn after Augustine
         if: github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *' && matrix.prenom == 'Marguerite'
         uses: mscoutermarsh/cowsays-action@master
         with:
@@ -56,4 +55,4 @@ jobs:
         env:
           blague: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            "Voici une blague: ${{ steps.Augustine.env.augustine_blague }}"
+            "Voici une blague: ${{ steps.Augustine.env.blague }}"
