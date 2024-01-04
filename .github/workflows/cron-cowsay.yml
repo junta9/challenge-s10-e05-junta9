@@ -16,14 +16,18 @@ jobs:
         id: random
         run: echo "RANDOM_NUMBER=$(shuf -i 1-6 -n 1)" >> $GITHUB_ENV
 
+      - name: export random number
+        run: echo "EXPORTED_RANDOM_NUMBER=${{ env.RANDOM_NUMBER }}" >> $GITHUB_ENV
+
       - name: cow speaking
         uses: mscoutermarsh/cowsays-action@master
         with:
           text: |
             Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            Voici une blague: ${{ env.blague[RANDOM_NUMBER] }}
+            Voici une blague:
 
     env:
+      # random_number: ${{ GITHUB_ENV. }}
       blague: |
         - Quelle est la partie préférée d’un astronaute sur un clavier? L’espace
         - Comment appelle-t-on une chauve-souris avec une perruque ? Une souris
