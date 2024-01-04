@@ -15,9 +15,6 @@ jobs:
       # Get the joke
       - id: myjoke
         uses: mickeygoussetorg/get-a-dad-joke@v1
-      # Use the joke output in another step
-      - name: Output Dad Joke
-        run: echo "BLAGUE=${{ steps.myjoke.outputs.dad-joke }}" >> $GITHUB_ENV
 
       - name: cow speaking
         uses: mscoutermarsh/cowsays-action@master
