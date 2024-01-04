@@ -1,4 +1,4 @@
-name: Cron Workflow
+name: Cows Workflow
 
 on:
   push:
@@ -7,24 +7,22 @@ jobs:
   run-matrixed:
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 2
       matrix:
-        prenom: ['marguerite', 'geraldine', 'augustine', 'Séraphine']
+        prenom: ['marguerite','geraldine','augustine','Séraphine']
 
     steps:
       - name: generate random number
         id: random
-        run: echo "::set-output name=value::$(shuf -i 0-5 -n 1)"
+        run: echo "RANDOM_NUMBER=$(shuf -i 1-6 -n 1)" >> $GITHUB_ENV
 
-      - name: set random number
-        id: set-random
-        run: echo "RANDOM_NUMBER=${{ steps.random.outputs.value }}" >> $GITHUB_ENV
-      
       - name: cow speaking
         uses: mscoutermarsh/cowsays-action@master
         with:
           text: |
-            Hello les DEVOPS, je m'appelle ${{ matrix.prenom }}
-            Voici une blague: ${{ env.blague[steps.random.outputs.value] }}
+            Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}
+            Voici une blague: ${{ env.blague[RANDOM_NUMBER] }}
+
     env:
       blague: |
         - Quelle est la partie préférée d’un astronaute sur un clavier? L’espace
