@@ -7,23 +7,24 @@ jobs:
   run-matrixed:
     runs-on: ubuntu-latest
     strategy:
-      # max-parallel: 2 # defini le nombre de jobs en parallele pour eviter l'utilisation de trop de ressources
       matrix:
-        prenom: ['marguerite','geraldine','augustine','Séraphine']
-        
-        blague:
-          - Quelle est la partie préférée d’un astronaute sur un clavier? L’espace
-          - Comment appelle-t-on une chauve-souris avec une perruque ? Une souris
-          - Pourquoi les canards sont toujours à l'heure ? Parce qu’ils sont dans l’étang.
-          - Que fait un crocodile quand il rencontre une superbe femelle ? Il Lacoste.
-          - Pourquoi les pêcheurs ne sont pas gros ? Parce qu’ils surveillent leur ligne.
-        exclude: 
-          - prenom: 'geraldine'
-          - prenom: 'Séraphine'
+        prenom: ['marguerite', 'geraldine', 'augustine', 'Séraphine']
+
     steps:
-    - name: cow speaking
-      uses: mscoutermarsh/cowsays-action@master
-      with:
-        text: |
-          Hello les DEVOPS, je m'appelle ${{ matrix.prenom }}
-          ${{ matrix.blague }}
+      - name: generate random number
+        id: random
+        run: echo "::set-output name=value::$(shuf -i 0-5 -n 1)"
+      
+      - name: cow speaking
+        uses: mscoutermarsh/cowsays-action@master
+        with:
+          text: |
+            Hello les DEVOPS, je m'appelle ${{ matrix.prenom }}
+            Voici une blague: ${{ matrix.blague[steps.random.outputs.value] }}
+        env:
+          matrix.blague: |
+            - Quelle est la partie préférée d’un astronaute sur un clavier? L’espace
+            - Comment appelle-t-on une chauve-souris avec une perruque ? Une souris
+            - Pourquoi les canards sont toujours à l'heure ? Parce qu’ils sont dans l’étang.
+            - Que fait un crocodile quand il rencontre une superbe femelle ? Il Lacoste.
+            - Pourquoi les pêcheurs ne sont pas gros ? Parce qu’ils surveillent leur ligne.
