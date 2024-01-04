@@ -14,6 +14,10 @@ jobs:
       - name: generate random number
         id: random
         run: echo "::set-output name=value::$(shuf -i 0-5 -n 1)"
+
+      - name: set random number
+        id: set-random
+        run: echo "RANDOM_NUMBER=${{ steps.random.outputs.value }}" >> $GITHUB_ENV
       
       - name: cow speaking
         uses: mscoutermarsh/cowsays-action@master
