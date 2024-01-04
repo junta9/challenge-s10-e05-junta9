@@ -27,7 +27,7 @@ jobs:
             Voici une blague: ${{ env.blague[env.random_number] }}
 
         env:
-          random_number: ${{ env.RANDOM_NUMBER}}
+          random_number: ${{ env.EXPORTED_RANDOM_NUMBER}}
           blague: |
             - Quelle est la partie préférée d’un astronaute sur un clavier? L’espace
             - Comment appelle-t-on une chauve-souris avec une perruque ? Une souris
