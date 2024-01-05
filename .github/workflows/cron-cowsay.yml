@@ -28,7 +28,7 @@ jobs:
           bonjour: "Bonjour les DEVOPS, je m'appelle ${{ matrix.prenom }}!"
 
       - name: cow speaking at 10h
-        if: github.event_name == 'schedule' && github.event.schedule == '0 10 * * *' && matrix.prenom == 'Séraphine'
+        if: github.event_name == 'schedule' && github.event.schedule == '0 5 * * *' && matrix.prenom == 'Séraphine'
         uses: mscoutermarsh/cowsays-action@master
         with:
           text: ${{ env.bonjour }}
@@ -46,9 +46,12 @@ jobs:
         env:
           blague: ${{ steps.myjoke.outputs.dad-joke }}
           
+      - name: wait
+        if: matrix.prenom == 'Marguerite'
+        run: sleep 300
 
       - name: cow speaking every 5mn after Augustine
-        if: github.event_name == 'schedule' && github.event.schedule == '*/10 8-17 * * *' && matrix.prenom == 'Marguerite'
+        if: matrix.prenom == 'Marguerite'
         uses: mscoutermarsh/cowsays-action@master
         with:
           text: ${{ env.blague }}
