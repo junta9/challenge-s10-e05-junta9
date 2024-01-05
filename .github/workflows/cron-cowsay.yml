@@ -46,12 +46,9 @@ jobs:
         env:
           blague: ${{ steps.myjoke.outputs.dad-joke }}
           
-      - name: wait
-        run: sleep 600
-      
-      
-      - name: Marguerite speaking every 5mn after Augustine
-        if:  matrix.prenom == 'Marguerite'
+
+      - name: cow speaking every 5mn after Augustine
+        if: github.event_name == 'schedule' && github.event.schedule == '*/10 8-17 * * *' && matrix.prenom == 'Marguerite'
         uses: mscoutermarsh/cowsays-action@master
         with:
           text: ${{ env.blague }}
