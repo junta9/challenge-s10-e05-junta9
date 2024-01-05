@@ -1,0 +1,16 @@
+name: docker cowsay
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: docker-build
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        
+      - name: build docker image
+        run: docker build -t macow-gh .
