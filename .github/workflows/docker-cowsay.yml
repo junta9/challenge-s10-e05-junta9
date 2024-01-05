@@ -15,5 +15,5 @@ jobs:
       - name: build docker image and push
         run: |
           docker build -t chouvang/macow-gh .
-          docker login docker.io -u chouvang -p ${{ secrets.GITHUB_TOKEN }}
+          docker login ghcr.io -u chouvang -p ${{ secrets.GITHUB_TOKEN }}
           docker push chouvang/macow-gh
