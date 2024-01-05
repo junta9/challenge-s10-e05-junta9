@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 9 * * *'  # Exécuter tous les matins à 9h UTC
     - cron: '0 10 * * *' # Exécuter tous les matins à 10h UTC
-    - cron: '*/10 9-17 * * *' # Exécuter toutes les 10 minutes
+    - cron: '*/10 8-17 * * *' # Exécuter toutes les 10 minutes
 
 jobs:
   run-matrixed:
