@@ -1,7 +1,8 @@
-name: docker cowsay
+name: test to build docker image
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -9,11 +10,15 @@ jobs:
     environment:
       name: docker-build
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
+    - name: checkout Dockerfile
+      uses: actions/checkout@v4
 
-      - name: build docker image and push
-        run: |
-          docker build -t chouvang/macow-gh .
-          docker login ghcr.io -u chouvang -p ${{ secrets.GITHUB_TOKEN }}
-          docker push chouvang/macow-gh
+    - name: build docker image
+      run: |
+        docker build -t ghcr.io/o-clock-hati/macow-gh .
+    - name: login to registry
+      run: |
+        docker login ghcr.io -u chouvang -p ${{ secrets.GITHUB_TOKEN }}
+    - name: try tu push image
+      run: |
+        docker push ghcr.io/o-clock-hati/macow-gh
