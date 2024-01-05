@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-        
+
       - name: build docker image
         run: docker build -t macow-gh .
+
+      - name: push docker image
+        run: docker push chouvang/macow-gh
