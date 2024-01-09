@@ -1,9 +1,25 @@
-# challenge-s10-e04-bis
+## Description
 
-## Générer des schedule avec des matrix
+Tuxsay is a fun command-line application that generates talking ASCII cows. It displays a given text inside a speech bubble held by a cow.
 
-Construisez un workflow qui exécute pour 4 vaches (Marguerite, Geraldine, Augustine et Séraphine) le scénario suivant :
+ ___________________
+< Hello les devops! >
+ -------------------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
 
-- Marguerite, Géraldine et Augustine disent tous les matins à 9h Bonjour, sauf Séraphine qui dit bonjour à 10h.
-- Augustine est drôle et raconte des blaques toutes les 10 minutes, Marquerite, elle répète les même blagues 5 minutes plus tard.
+## Usage
+```
+docker run --rm -it <container_name> <your_text>
+```
 
+### build image
+docker build --target build -t chouvang/matuxpy:full .
+docker build -t chouvang/matuxpy:small .

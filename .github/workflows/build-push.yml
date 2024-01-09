@@ -1,0 +1,17 @@
+name: Build and push docker image
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout Dockerfile
+        uses: actions/checkout@v4
+
+      - name: build Docker image full
+        run: docker build --target build -t chouvang/matuxpy:full .
+
+      - name: build Docker image small
+        run: docker build --target final -t chouvang/matuxpy:small .
