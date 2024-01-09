@@ -2,6 +2,7 @@
 
 Tuxsay is a fun command-line application that generates talking ASCII cows. It displays a given text inside a speech bubble held by a cow.
 
+```
  ___________________
 < Hello les devops! >
  -------------------
@@ -15,11 +16,13 @@ Tuxsay is a fun command-line application that generates talking ASCII cows. It d
     /'\_   _/`\
     \___)=(___/
 
+```
+
 ## Usage
 ```
 docker run --rm -it <container_name> <your_text>
 ```
 
 ### build image
-docker build --target build -t chouvang/matuxpy:full .
-docker build -t chouvang/matuxpy:small .
+- docker build --target build -t chouvang/matuxpy:full .
+- docker build -t chouvang/matuxpy:small .
