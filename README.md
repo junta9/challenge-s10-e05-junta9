@@ -20,6 +20,7 @@ Tuxsay is a fun command-line application that generates talking ASCII cows. It d
 
 ## Usage
 ```
+docker pull chouvang/matuxpy
 docker run --rm -it <container_name> <your_text>
 ```
 
